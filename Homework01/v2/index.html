@@ -1,0 +1,149 @@
+<head>
+
+
+</head>
+
+<body>
+    <!-- Plotly chart will be drawn inside this DIV -->
+    <div id="chartDiv" style="width:800px;height:800px"></div>
+
+    <!-- Controls -->
+    <div id="controlDiv">
+
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td>w0 (bias):<input id="inputW0" size=4 value=0></td>
+                    <!-- <td>w1 (x):<input id="inputW1" size=4 value=0></td>
+                    <td>w2 (y):<input id="inputW2" size=4 value=0></td> -->
+                    <td colspan=3>Weight settings</td>
+                    <td>
+                        <input type="radio" id="radialVarW"
+                            name="radialVariable" value="weight">
+                        <label for="radialVarW">Vary by Weight</label>
+                    </td>
+                </tr>
+                <tr>
+                        <td><input id="inputN" size=4 value=100></td>
+                        <td colspan=3>Number of points to train with</td>
+                        <td>
+                            <input type="radio" id="radialVarN"
+                                name="radialVariable" value="number">
+                            <label for="radialVarN">Vary by Number of training elements</label>
+                        </td>
+                </tr>
+                <tr>
+                        <td><input id="inputLr" size=4 value=0.1></td>
+                        <td colspan=3>Learn Rate</td>
+                        <td>
+                            <input type="radio" id="radialVarLr"
+                                name="radialVariable" value="learnRate">
+                            <label for="radialVarLr">Vary by Learn rate</label>
+                        </td>
+                </tr>
+                <tr>
+                        <td><input id="inputR" size=4 value=10></td>
+                        <td colspan=3>Max distance of point from center (radius)</td>
+                        <td>
+                            <input type="radio" id="radialVarR"
+                                name="radialVariable" value="radius">
+                            <label for="radialVarR">Vary by Radius</label>
+                        </td>
+                </tr>
+                <tr>
+                        <td><input id="inputM" size=4 value=1.0></td>
+                        <td colspan=3>Margin width (half is distance of margin line to true line)</td>
+                        <td>
+                            <input type="radio" id="radialVarM"
+                                name="radialVariable" value="margin">
+                            <label for="radialVarM">Vary by Margin</label>
+                        </td>
+                </tr>
+                <tr>
+                    
+                </tr>
+                <tr>
+                        <td><hr><button id="retrainButton" value=>Retrain</button><hr></td>
+                        <td colspan=3>Retrain </td>
+                        <td>
+                            <input type="radio" id="radialVarOtr"
+                                name="radialVariable" value="oneTimeRun" checked="true">
+                            <label for="radialVarOtr">One time run</label>
+                        </td>
+                </tr>
+                <tr>
+                    
+                </tr>
+                <tr>
+                        <td><input id="inputBadPointDelay" size=4 value=100>ms</td>
+                        <td colspan=3>How long to show incorrect point before updating weight, <=0 means dont draw</td>
+                </tr>
+                <tr>
+                        <td><input id="inputEvaluationDelay" size=4 value=100>ms</td>
+                        <td colspan=3>How long to show adjusted weight line, <=0 means dont draw while training</td>
+                </tr>
+                <tr>
+                        <td><input id="inputCycleLimit" size=5 value=200>ms</td>
+                        <td colspan=3>Cycle Limit</td>
+                </tr>
+            </tbody>
+        </table>
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td><input id="varianceIterations" size=4 value=1></td>
+                    <td>Iterations per value</td>
+                </tr>
+                <tr>
+                    <td><input id="varianceIncrement" size=4 value=1></td>
+                    <td>Increment by</td>
+                </tr>
+                <tr>
+                    <td><input id="varianceLimit" size=4 value=1></td>
+                    <td>Up to value</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+    </div>
+    <!-- Controls -->
+    <div>
+        Data Retrieval
+        <div id="buttonsForDataGrabber"></div>
+        <button id="buttonShowHideDataDump">Show / Hide data</button>
+        <textarea
+            id="dumpArea"
+            style="display:none">Data dump ends up here </textarea>
+    </div>
+
+
+
+    <!-- Information output area -->
+    <div id="infoDiv"></div>
+
+
+
+
+
+
+
+
+    <!-- ****************************************************************************************************************************** -->
+    <!-- Import scripts and end of body to improve load time -->
+    <!-- Plotly.js is the visual plotting library-->
+    <script src="plotly-v1.32.js"></script>
+
+
+    <!-- Import dependencies -->
+    <script src="perceptron.js"></script>
+    <script src="pointGenerator.js"></script>
+    <script src="chartMaker.js"></script>
+    <script src="buttonEffects.js"></script>
+
+
+    <!-- Code starts here -->
+    <script src="main.js"></script>
+
+</body>

@@ -1,0 +1,88 @@
+<head>
+    <!-- Plotly.js -->
+    <script src="plotly-v1.32.js"></script>
+</head>
+
+<body>
+    <!-- Plotly chart will be drawn inside this DIV -->
+    <div id="myDiv" style="width:800px;height:800px"></div>
+    <div>
+        w0 (bias):<input id="iw0" size=4 value=0>
+        w1 (x):<input id="iw1" size=4 value=0>
+        w2 (y):<input id="iw2" size=4 value=0>
+        learn Rate:<input id="ilr" size=4 value=0.1>
+        <button id="trainD01" value=>Retrain d01</button>
+        <button id="trainLower">Retrain lower</button>
+        <button id="trainXor">Retrain xor</button>
+        <button id="trainAnd">Retrain and</button>
+    </div>
+    <div id="infoDiv"></div>
+
+
+    <script src="perceptron.js"></script>
+    <script src="chartMaker.js"></script>
+    <script src="data01.js"></script>
+    <script>
+        // D
+        var trainingData = data01;
+        trainingData = clusterIntoLowerQuadrants;
+        trainingData = xorData;
+        // trainingData = andData;
+        // w
+        var weight_start = [0, 0, 0]; // only 2 values per element (at the moment)
+
+        chartMaker.makeScatterChartOfData(trainingData);
+        perceptron.train(trainingData, weight_start, 0.1);
+
+
+        var btn = document.getElementById("trainD01");
+        btn.addEventListener("click", () => {
+            vals = getInputValues();
+            perceptron.cycleCount = 100;
+            setTimeout(() => {
+            chartMaker.makeScatterChartOfData(data01);
+                perceptron.train(data01, [vals[0], vals[1], vals[2]], vals[3]);
+            }, 1000);
+        });
+        btn = document.getElementById("trainLower");
+        btn.addEventListener("click", () => {
+            vals = getInputValues();
+            perceptron.cycleCount = 100;
+            setTimeout(() => {
+            chartMaker.makeScatterChartOfData(clusterIntoLowerQuadrants);
+                perceptron.train(clusterIntoLowerQuadrants, [vals[0], vals[1], vals[2]], vals[3]);
+            }, 1000);
+        });
+        btn = document.getElementById("trainXor");
+        btn.addEventListener("click", () => {
+            vals = getInputValues();
+            perceptron.cycleCount = 100;
+            setTimeout(() => {
+            chartMaker.makeScatterChartOfData(xorData);
+                perceptron.train(xorData, [vals[0], vals[1], vals[2]], vals[3]);
+            }, 1000);
+        });
+        btn = document.getElementById("trainAnd");
+        btn.addEventListener("click", () => {
+            vals = getInputValues();
+            perceptron.cycleCount = 100;
+            setTimeout(() => {
+            chartMaker.makeScatterChartOfData(andData);
+                perceptron.train(andData, [vals[0], vals[1], vals[2]], vals[3]);
+            }, 1000);
+        });
+
+
+        function getInputValues() {
+            var iw0 = parseFloat(document.getElementById("iw0").value);
+            var iw1 = parseFloat(document.getElementById("iw1").value);
+            var iw2 = parseFloat(document.getElementById("iw2").value);
+            var ilr = parseFloat(document.getElementById("ilr").value);
+
+            var arr = [ iw0, iw1, iw2, ilr];
+            console.log("Values detected:" + arr);
+            return arr;
+        }
+
+    </script>
+</body>

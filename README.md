@@ -1,2 +1,1 @@
-# ICS635
-Staging area for ideas
+# ICS635 - Machine learning
